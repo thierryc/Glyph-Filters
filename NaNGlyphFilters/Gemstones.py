@@ -36,8 +36,12 @@ class Gemstones(NaNFilter):
 		AddPaths(spikepaths, thislayer)
 
 		rockpaths = moonrocks(thislayer, outlinedata2, params["iterations"], maxgap=8)
-		rockpaths = ConvertPathlistDirection(rockpaths, 1)
+		for i, path in enumerate(rockpaths):
+			print(i)
+			if path.direction != 1:
+				path.reverse()
 		AddPaths(rockpaths, thislayer)
+		
 		retractHandles(thislayer)
 
 		self.CleanOutlines(thislayer, remSmallPaths=True, remSmallSegments=True, remStrayPoints=True, remOpenPaths=True, keepshape=False)
